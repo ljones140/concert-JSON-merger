@@ -1,4 +1,4 @@
-
+require './lib/concert_merger.rb'
 
 describe 'concert merger' do
 
