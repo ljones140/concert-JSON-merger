@@ -16,4 +16,8 @@ describe 'concert merger' do
     expect(concert_merger.descriptions[0].date).to eq("2012-10-08")
   end
 
+  it 'groups concerts with matching artists and dates' do
+
+  end
+
 end

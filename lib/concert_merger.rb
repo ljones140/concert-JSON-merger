@@ -8,15 +8,20 @@ class ConcertMerger
   def initialize(options)
     @descriptions = []
     @description_class = options[:description_class]
-    concerts_json = options[:concert_json]
-    json_to_descriptions(concerts_json)
+    descriptions = json_to_hash(options[:concert_json])
+    populate_descriptions(descriptions)
   end
 
-  def json_to_descriptions(json)
-    descriptions = JSON.parse(File.read(json), symbolize_names: true)
+  private
+
+  def populate_descriptions(descriptions)
     descriptions.each do |description| 
       @descriptions << @description_class.new(description)
     end
+  end
+
+  def json_to_hash(json)
+    JSON.parse(File.read(json), symbolize_names: true)
   end
 
 end
