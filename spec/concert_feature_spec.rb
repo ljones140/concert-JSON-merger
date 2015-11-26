@@ -1,10 +1,19 @@
 require './lib/concert_merger.rb'
+require './lib/concert_description.rb'
 
 describe 'concert merger' do
 
-  concert_merger = ConcertMerger.new({ concert_json: '../concerts.json' })
+  concert_merger = ConcertMerger.new({ concert_json: './concerts.json',
+                                       description_class: ConcertDescription })
 
-  it 'groups concerts that have same artists and date' do
-
+  it 'converts JSON into concert description instances' do
+    expect(concert_merger.descriptions.count).to eq(10)
+    expect(concert_merger.descriptions.all? { |description| description.is_a?(ConcertDescription) } ).to be true
   end
+
+  it 'creates description instances with artists and date attributes' do
+    expect(concert_merger.descriptions[0].artists).to eq(["Radiohead"])
+    expect(concert_merger.descriptions[0].date).to eq("2012-10-08")
+  end
+
 end
